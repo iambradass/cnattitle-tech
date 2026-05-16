@@ -1,0 +1,67 @@
+# cnattitle.tech — review hub
+# Apache config for Hostinger shared hosting
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Drop trailing slash on real pages (so /review and /review/ both work)
+DirectoryIndex index.html
+DirectorySlash Off
+
+# Apex root → cnattitle.com (preserves current behavior)
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ https://cnattitle.com [L,R=301]
+
+# Preserve the old GHL form-action path used in active SMS/email campaigns
+RewriteRule ^thank-you-4611/?$ /thank-you [L,R=301]
+RewriteRule ^thank-you-4611\.html$ /thank-you [L,R=301]
+
+# Map old GHL paths that were 301'd to cnattitle.com — preserve that behavior
+RewriteRule ^closed/?$         https://cnattitle.com [L,R=301]
+RewriteRule ^thanks/?$         https://cnattitle.com [L,R=301]
+RewriteRule ^home/?$           https://cnattitle.com [L,R=301]
+RewriteRule ^book/?$           https://cnattitle.com [L,R=301]
+RewriteRule ^schedule/?$       https://cnattitle.com [L,R=301]
+RewriteRule ^quote/?$          https://cnattitle.com [L,R=301]
+RewriteRule ^order/?$          https://cnattitle.com [L,R=301]
+RewriteRule ^contact/?$        https://cnattitle.com [L,R=301]
+RewriteRule ^survey/?$         https://cnattitle.com [L,R=301]
+RewriteRule ^referral/?$       https://cnattitle.com [L,R=301]
+RewriteRule ^partners/?$       https://cnattitle.com [L,R=301]
+RewriteRule ^careers/?$        https://cnattitle.com [L,R=301]
+RewriteRule ^about/?$          https://cnattitle.com [L,R=301]
+
+# Allow real files / dirs to serve normally
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Catch-all: anything else → cnattitle.com (matches old GHL behavior)
+RewriteRule ^.*$ https://cnattitle.com [L,R=301]
+
+# Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/plain text/xml
+</IfModule>
+
+# Security
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
