@@ -59,17 +59,12 @@ a:hover { text-decoration: underline; }
 .container.wide { max-width: 960px; }
 
 /* Header */
-.brand-bar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
-.brand-mark { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: 0.5px; color: var(--white); }
-.brand-mark .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 4px rgba(250,237,54,0.18); }
-.brand-mark .sub { color: var(--muted); font-weight: 500; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-left: 8px; }
-.brand-tag { font-family: var(--font-display); font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
-.brand-tag .gold { color: var(--yellow); }
+.brand-bar { display: flex; align-items: center; justify-content: flex-start; padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.brand-logo { display: inline-block; }
+.brand-logo img { display: block; height: 36px; width: auto; max-width: 200px; }
 
 /* Hero */
 .hero { text-align: left; margin-bottom: 36px; }
-.hero .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(250,237,54,0.10); border: 1px solid rgba(250,237,54,0.40); color: var(--yellow); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; }
-.hero .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 4px rgba(250,237,54,0.22); }
 .hero h1 { font-family: var(--font-display); font-weight: 300; font-size: clamp(34px, 6.5vw, 52px); line-height: 1.05; letter-spacing: -1px; margin-bottom: 14px; }
 .hero h1 .accent { color: var(--yellow); font-weight: 800; }
 .hero p.lead { font-size: 17px; color: #c9d4e8; max-width: 540px; line-height: 1.55; }
@@ -115,15 +110,24 @@ a:hover { text-decoration: underline; }
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 18px 16px;
-  display: flex; flex-direction: column; gap: 6px;
+  padding: 18px 18px;
+  display: flex; align-items: center; gap: 14px;
   text-decoration: none; color: var(--white);
   transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
 }
 .loc-card:hover { transform: translateY(-2px); border-color: rgba(250,237,54,0.45); background: rgba(255,255,255,0.07); text-decoration: none; }
-.loc-card .pin { font-size: 18px; color: var(--yellow); }
-.loc-card .name { font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.loc-card .pin {
+  flex: 0 0 44px; width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(250,237,54,0.12);
+  color: var(--yellow);
+  font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+.loc-card .body { flex: 1; min-width: 0; }
+.loc-card .name { font-family: var(--font-display); font-weight: 700; font-size: 17px; line-height: 1.2; margin-bottom: 2px; }
 .loc-card .hint { font-size: 12px; color: var(--muted); letter-spacing: 0.4px; }
+.loc-card .arrow { color: var(--muted); font-size: 20px; opacity: 0.7; }
 
 /* Form */
 .form-card { background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
@@ -194,16 +198,15 @@ a:hover { text-decoration: underline; }
 
 /* Mobile */
 @media (max-width: 540px) {
-  .container { padding: 24px 16px 56px; }
+  .container { padding: 20px 16px 56px; }
   .stat-strip { grid-template-columns: 1fr; }
   .loc-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 36px; }
   .choice { padding: 18px; }
   .choice .icon { flex: 0 0 48px; width: 48px; height: 48px; font-size: 24px; border-radius: 12px; }
   .form-card { padding: 20px; }
-  .brand-bar { padding-bottom: 22px; margin-bottom: 28px; }
-  .brand-mark .sub { display: none; }
-  .brand-tag { display: none; }
+  .brand-bar { padding-bottom: 20px; margin-bottom: 24px; }
+  .brand-logo img { height: 30px; }
   .success-card { padding: 36px 22px; }
   .success-card h1 { font-size: 30px; }
 }
