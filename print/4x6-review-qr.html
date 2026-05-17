@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CNAT · 4x6 Print · Review QR</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* 4x6 inches at 300 DPI with 0.125" bleed each side = 4.25x6.25 in = 1275x1875 px */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1275px; height: 1875px; overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+  }
+  body {
+    width: 1275px; height: 1875px;
+    background: #0a0e16;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+
+  /* Decorative background layers */
+  .bg-glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 10%, rgba(250,237,54,0.10), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(45,125,210,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,0.85) 40%, transparent 85%);
+  }
+
+  /* Safe zone — 0.125" trim + 0.125" safe area inset (0.25" from each edge) */
+  .frame {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding: 75px 75px;            /* 0.25" safe zone */
+    display: flex; flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Header — logo */
+  .logo {
+    width: 320px;
+    margin-top: 20px;
+  }
+  .logo img { width: 100%; height: auto; display: block; }
+
+  .eyebrow {
+    margin-top: 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #faed36;
+  }
+
+  /* Headline */
+  h1 {
+    margin-top: 26px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 1.02;
+    letter-spacing: -1.5px;
+    max-width: 880px;
+  }
+  h1 .accent {
+    color: #faed36;
+    font-weight: 700;
+  }
+
+  .lead {
+    margin-top: 22px;
+    font-size: 22px;
+    line-height: 1.4;
+    color: #b9c2d4;
+    max-width: 800px;
+    font-weight: 400;
+  }
+
+  /* QR card */
+  .qr-card {
+    margin-top: 56px;
+    background: #ffffff;
+    padding: 36px 36px 30px;
+    border-radius: 24px;
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.45),
+      0 0 0 8px rgba(250,237,54,0.18);
+    position: relative;
+  }
+  .qr-card .qr-wrap {
+    width: 640px; height: 640px;
+    display: block;
+  }
+  .qr-card .qr-wrap img { width: 100%; height: 100%; display: block; }
+
+  .qr-url {
+    margin-top: 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.5px;
+    color: #091d4f;
+    text-align: center;
+  }
+  .qr-url .acc { color: #c9b615; }
+  .qr-url .dim { color: #5d6679; }
+
+  .qr-helper {
+    margin-top: 28px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #faed36;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .qr-helper::before, .qr-helper::after {
+    content: ""; width: 28px; height: 2px; background: rgba(250,237,54,0.45);
+  }
+
+  /* Spacer pushes footer to bottom */
+  .spacer { flex: 1; min-height: 20px; }
+
+  /* Footer */
+  .footer {
+    width: 100%;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .footer .tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #b9c2d4;
+  }
+  .footer .tag .gold { color: #faed36; }
+  .footer .copy {
+    font-size: 14px;
+    color: #5d6679;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="grid"></div>
+
+  <div class="frame">
+    <div class="logo">
+      <img src="../assets/cnat-logo-white.png" alt="CNAT Title">
+    </div>
+
+    <div class="eyebrow">You closed · Tell us how we did</div>
+
+    <h1>Thanks for <span class="accent">closing</span> with us.</h1>
+    <p class="lead">Your closing is done — sixty seconds of feedback helps the next family pick a title team that actually shows up.</p>
+
+    <div class="qr-card">
+      <div class="qr-wrap"><img src="../assets/qr-review-print.png" alt="QR code"></div>
+      <div class="qr-url">cnattitle<span class="acc">.tech</span><span class="dim">/review</span></div>
+    </div>
+
+    <div class="qr-helper">Scan with your camera</div>
+
+    <div class="spacer"></div>
+
+    <div class="footer">
+      <div class="tag">#AlwaysBeClosing <span class="gold">· Texas Style</span></div>
+      <div class="copy">© Community National Title · cnattitle.com</div>
+    </div>
+  </div>
+</body>
+</html>
