@@ -32,6 +32,12 @@ body {
   color: var(--white);
   background: var(--bg-page);
   min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 24px 0;
 }
 
 img { max-width: 100%; display: block; }
@@ -41,12 +47,13 @@ a:hover { text-decoration: underline; }
 /* Floating card layout */
 .container {
   max-width: 520px;
-  margin: 48px auto;
+  margin: 0 auto;
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
   padding: 48px 40px;
   position: relative;
+  width: 100%;
 }
 .container.wide { max-width: 640px; }
 
@@ -150,12 +157,12 @@ a:hover { text-decoration: underline; }
   background: var(--card-2);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 22px 16px;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 20px 16px 18px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
   text-decoration: none; color: var(--white);
   transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
   text-align: center;
-  min-height: 110px;
+  min-height: 140px;
 }
 .loc-card:hover {
   transform: translateY(-2px);
@@ -167,14 +174,22 @@ a:hover { text-decoration: underline; }
   font-size: 22px;
   line-height: 1;
 }
-.loc-card .body { display: contents; }
+.loc-card .body { display: flex; flex-direction: column; gap: 4px; align-items: center; }
 .loc-card .name {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.2px;
   line-height: 1.2;
+  color: var(--white);
+}
+.loc-card .addr {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted);
+  max-width: 200px;
 }
 .loc-card .hint { display: none; }
 .loc-card .arrow { display: none; }
@@ -297,13 +312,14 @@ a:hover { text-decoration: underline; }
 
 /* Mobile (≤540px): card goes edge-to-edge, no shadow */
 @media (max-width: 540px) {
+  body { padding: 0; justify-content: center; background: var(--card); }
   .container {
     max-width: 100%;
     margin: 0;
     border-radius: 0;
     box-shadow: none;
-    padding: 28px 22px 40px;
-    min-height: 100vh;
+    padding: 32px 22px 40px;
+    background: transparent;
   }
   .brand-bar { padding-bottom: 22px; margin-bottom: 24px; }
   .brand-logo img { height: 30px; }
@@ -312,16 +328,26 @@ a:hover { text-decoration: underline; }
   .hero p.lead { font-size: 14px; }
   .choice { padding: 16px; min-height: 70px; }
   .choice .icon { flex: 0 0 40px; width: 40px; height: 40px; font-size: 20px; }
-  .loc-grid { grid-template-columns: repeat(2, 1fr); }
-  .loc-card { min-height: 100px; padding: 18px 12px; }
-  .loc-card .name { font-size: 12px; }
+  .loc-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .loc-card { min-height: 130px; padding: 18px 10px 16px; }
+  .loc-card .name { font-size: 15px; }
+  .loc-card .addr { font-size: 11px; max-width: 100%; }
   .footer { margin-top: 28px; padding-top: 18px; }
 }
 
-/* Very narrow phones: collapse locations to one column */
-@media (max-width: 380px) {
+/* Very narrow phones / small screens: collapse locations to single column rows */
+@media (max-width: 400px) {
   .loc-grid { grid-template-columns: 1fr; }
-  .loc-card { flex-direction: row; min-height: auto; padding: 14px 16px; gap: 14px; }
-  .loc-card .pin { font-size: 20px; }
-  .loc-card .name { letter-spacing: 1px; }
+  .loc-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    min-height: auto;
+    padding: 14px 16px;
+    gap: 14px;
+  }
+  .loc-card .pin { font-size: 22px; flex-shrink: 0; }
+  .loc-card .body { align-items: flex-start; flex: 1; min-width: 0; }
+  .loc-card .name { font-size: 16px; }
+  .loc-card .addr { font-size: 12px; max-width: 100%; }
 }
