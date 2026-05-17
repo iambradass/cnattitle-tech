@@ -92,50 +92,107 @@ a:hover { text-decoration: underline; }
 
 /* Choice cards (used on /review) */
 .choice-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 8px; }
+
+/* Primary CTA — the one we want them to pick */
 .choice {
-  display: flex; gap: 16px;
-  background: var(--card-2);
-  border: 1px solid var(--line);
+  display: flex; gap: 18px;
+  background: linear-gradient(135deg, rgba(250,237,54,0.10), rgba(250,237,54,0.04));
+  border: 2px solid rgba(250,237,54,0.55);
   border-radius: var(--radius-sm);
-  padding: 18px 18px;
+  padding: 24px 22px;
   align-items: center;
   text-decoration: none;
   color: var(--white);
-  transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
-  min-height: 76px;
+  transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(250,237,54,0.0), 0 8px 24px rgba(0,0,0,0.25);
 }
 .choice:hover {
   transform: translateY(-2px);
-  background: var(--card-3);
-  border-color: rgba(250,237,54,0.30);
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 4px rgba(250,237,54,0.10), 0 14px 30px rgba(0,0,0,0.35);
   text-decoration: none;
 }
-.choice .icon {
-  flex: 0 0 44px; width: 44px; height: 44px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  background: rgba(250,237,54,0.10);
-  color: var(--yellow);
+.choice .badge {
+  position: absolute;
+  top: -10px; right: 16px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
 }
-.choice.secondary .icon {
-  background: rgba(255,255,255,0.06);
-  color: var(--white);
-  font-size: 20px;
+.choice .icon {
+  flex: 0 0 56px; width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  background: var(--yellow);
+  color: var(--navy);
+  box-shadow: 0 6px 18px rgba(250,237,54,0.20);
 }
 .choice .copy { flex: 1; min-width: 0; }
 .choice .copy h3 {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 4px;
-  line-height: 1.2;
+  line-height: 1.15;
 }
-.choice .copy p { font-size: 12px; color: var(--muted); line-height: 1.4; margin: 0; }
-.choice .arrow { color: var(--muted-2); font-size: 18px; flex-shrink: 0; }
+.choice .copy p { font-size: 13px; color: var(--muted); line-height: 1.4; margin: 0; }
+.choice .arrow { color: var(--yellow); font-size: 22px; flex-shrink: 0; font-weight: 700; }
+
+/* Secondary CTA — smaller, quieter "alternative" */
+.choice.secondary {
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 12px 16px;
+  gap: 12px;
+  box-shadow: none;
+  min-height: 0;
+}
+.choice.secondary:hover {
+  background: var(--card-2);
+  border-color: rgba(255,255,255,0.10);
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+.choice.secondary .icon {
+  flex: 0 0 36px; width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  font-size: 16px;
+  box-shadow: none;
+}
+.choice.secondary .copy h3 {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.choice.secondary .copy p { font-size: 11px; color: var(--muted-2); }
+.choice.secondary .arrow { color: var(--muted-2); font-size: 16px; font-weight: 400; }
+
+/* Divider between primary and secondary */
+.choice-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 16px 0 12px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.choice-divider::before, .choice-divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
 
 /* Locations grid: 2-col tiles desktop, 1-col rows mobile */
 .loc-section { margin-bottom: 24px; }
@@ -326,8 +383,12 @@ a:hover { text-decoration: underline; }
   .hero { margin-bottom: 28px; }
   .hero h1 { font-size: 30px; }
   .hero p.lead { font-size: 14px; }
-  .choice { padding: 16px; min-height: 70px; }
-  .choice .icon { flex: 0 0 40px; width: 40px; height: 40px; font-size: 20px; }
+  .choice { padding: 20px 18px; gap: 16px; }
+  .choice .icon { flex: 0 0 52px; width: 52px; height: 52px; font-size: 24px; }
+  .choice .copy h3 { font-size: 15px; }
+  .choice.secondary { padding: 10px 14px; gap: 10px; }
+  .choice.secondary .icon { flex: 0 0 32px; width: 32px; height: 32px; font-size: 14px; }
+  .choice.secondary .copy h3 { font-size: 11px; }
   .loc-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .loc-card { min-height: 130px; padding: 18px 10px 16px; }
   .loc-card .name { font-size: 15px; }
