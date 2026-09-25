@@ -1,3 +1,11 @@
+# BEGIN agent-workflow privacy
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule (^|/)\.(agent-workflow|github)(/|$) - [F,L,NC]
+RewriteRule (^|/)(AGENTS|CLAUDE|PROJECT)\.md$ - [F,L,NC]
+</IfModule>
+# END agent-workflow privacy
+
 # cnattitle.tech — review hub
 # Apache config for Hostinger shared hosting
 
