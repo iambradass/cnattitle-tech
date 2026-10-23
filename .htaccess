@@ -24,9 +24,16 @@ DirectorySlash Off
 RewriteCond %{REQUEST_URI} ^/$
 RewriteRule ^$ https://cnattitle.com [L,R=301]
 
+# Review pages moved to cnattitle.com/review on 2026-10-23. Printed QR cards and texts
+# already sent point at cnattitle.tech/review, so these forwards must stay.
+RewriteRule ^review/?$            https://cnattitle.com/review/ [L,R=301]
+RewriteRule ^locations-picker/?$  https://cnattitle.com/review/locations/ [L,R=301]
+RewriteRule ^feedback-form/?$     https://cnattitle.com/review/feedback/ [L,R=301]
+RewriteRule ^thank-you/?$         https://cnattitle.com/review/thank-you/ [L,R=301]
+
 # Preserve the old GHL form-action path used in active SMS/email campaigns
-RewriteRule ^thank-you-4611/?$ /thank-you [L,R=301]
-RewriteRule ^thank-you-4611\.html$ /thank-you [L,R=301]
+RewriteRule ^thank-you-4611/?$ https://cnattitle.com/review/thank-you/ [L,R=301]
+RewriteRule ^thank-you-4611\.html$ https://cnattitle.com/review/thank-you/ [L,R=301]
 
 # Map old GHL paths that were 301'd to cnattitle.com — preserve that behavior
 RewriteRule ^closed/?$         https://cnattitle.com [L,R=301]
